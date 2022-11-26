@@ -132,7 +132,7 @@ Stake your knives, produce your $SUPPLY, and choose the raffles you like to part
 
 The raffle tickets can be bought with $SUPPLY, or with others specific tokens.<br>
 
-<a href="https://www.knives-legacy.io/raffles" target="_blank"> 
+<a href="https://www.knives-legacy.io/dashboard/knives/raffle" target="_blank"> 
   🎟️ Check the raffles
 </a>
 
