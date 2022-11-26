@@ -1,0 +1,1170 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "subscriptionId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "token_address",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "have",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "want",
+        "type": "address"
+      }
+    ],
+    "name": "OnlyCoordinatorCanFulfill",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "claimer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "ClaimFees",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "EnteredRaffle",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "winners",
+        "type": "address[]"
+      }
+    ],
+    "name": "WinnersPicked",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_toAdd",
+        "type": "address"
+      }
+    ],
+    "name": "addAuthorized",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "authorized",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "project_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "raffle_type",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "erc20prices",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "erc20address",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "erc20names",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_fee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket_wallet",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint32",
+            "name": "winners_amount",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raffle_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "open_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "close_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current_entries",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.Raffle",
+        "name": "new_raffle",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "twitter_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "discord_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "network",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nft_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.ProjectInfo",
+        "name": "new_project_info",
+        "type": "tuple"
+      }
+    ],
+    "name": "createRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "current_raffle",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "project_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "raffle_type",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "erc20prices",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "erc20address",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "erc20names",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_fee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket_wallet",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint32",
+            "name": "winners_amount",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raffle_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "open_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "close_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current_entries",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.Raffle",
+        "name": "new_raffle",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "twitter_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "discord_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "network",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nft_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.ProjectInfo",
+        "name": "new_project_info",
+        "type": "tuple"
+      }
+    ],
+    "name": "editRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllRaffles",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "project_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "raffle_type",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "erc20prices",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "erc20address",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "erc20names",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_fee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket_wallet",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint32",
+            "name": "winners_amount",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raffle_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "open_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "close_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current_entries",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.Raffle[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "twitter_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "discord_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "network",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nft_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.ProjectInfo[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "random_number",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "participants",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "winners",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct RaffleTicket.RaffleState[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getDisplayedRaffles",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "project_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "raffle_type",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "erc20prices",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "erc20address",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "erc20names",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_fee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_ticket_wallet",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint32",
+            "name": "winners_amount",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raffle_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "open_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "close_timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current_entries",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.Raffle[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "twitter_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "discord_url",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "network",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nft_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mint_timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct RaffleTicket.ProjectInfo[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "random_number",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "participants",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "winners",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct RaffleTicket.RaffleState[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffle_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getParticipants",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRaffleState",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffle_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRandomNumber",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffle_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWinners",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "hasWon",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "has_won",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      }
+    ],
+    "name": "isRaffleOpen",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      }
+    ],
+    "name": "pickWinners",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "raffleIdToProjectInfo",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "twitter_url",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "discord_url",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "network",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "nft_price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "mint_timestamp",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "raffleIdToRaffle",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "project_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "image_url",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "raffle_type",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "mint_fee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "max_ticket",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "max_ticket_wallet",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint32",
+        "name": "winners_amount",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "raffle_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "open_timestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "close_timestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "current_entries",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "randomWords",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "rawFulfillRandomWords",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_toRemove",
+        "type": "address"
+      }
+    ],
+    "name": "removeAuthorized",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      }
+    ],
+    "name": "requestRandomWords",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "s_requestId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "safeMint",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "raffleId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "indexErc20",
+        "type": "uint256"
+      }
+    ],
+    "name": "safeMintErc20",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_keyHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setKeyHash",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_requestConfirmation",
+        "type": "uint16"
+      }
+    ],
+    "name": "setRequestConfirmation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "_subscriptionId",
+        "type": "uint64"
+      }
+    ],
+    "name": "setSubscriptionId",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vrfCoordinator",
+        "type": "address"
+      }
+    ],
+    "name": "setVrfCoordinator",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "_callbackGasLimit",
+        "type": "uint32"
+      }
+    ],
+    "name": "setcallbackGasLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
